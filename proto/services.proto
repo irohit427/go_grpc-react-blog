@@ -1,0 +1,51 @@
+syntax="proto3";
+
+package proto;
+
+option go_package = "proto;blog";
+
+
+message LoginRequest {
+  string Username = 1;
+  string Password = 2;
+}
+
+message AuthResponse {
+  string Token = 1;
+}
+
+message UsernameUsedRequest {
+  string Username = 1;
+}
+
+message EmailUsedRequest {
+  string Email = 1;
+}
+
+message UsedResponse {
+  bool Used = 1;
+}
+
+message SignupRequest {
+  string Username = 1;
+  string Email = 2;
+  string Password = 3;
+}
+
+message AuthUserRequest {
+  string Token = 1;
+}
+
+message AuthUserResponse {
+  string ID = 1;
+  string Username = 2;
+  string Email = 3;
+}
+
+service AuthService {
+  rpc Login(LoginRequest) returns (AuthResponse);
+  rpc Signup(SignupRequest) returns (AuthResponse);
+  rpc UsernameUsed(UsernameUsedRequest) returns (UsedResponse);
+  rpc EmailUsed(EmailUsedRequest) returns (UsedResponse);
+  rpc AuthUser(AuthUserRequest) returns (AuthUserResponse);
+}
